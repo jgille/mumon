@@ -1,0 +1,20 @@
+group 'org.jgille.mumon'
+version '1.0-SNAPSHOT'
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: "groovy"
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testCompile 'org.spockframework:spock-core:1.0-groovy-2.4',
+                'org.codehaus.groovy:groovy-all:2.4.3'
+    }
+}
+

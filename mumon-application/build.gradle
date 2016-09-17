@@ -1,0 +1,15 @@
+task fatJar(type: Jar) {
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+    manifest {
+        attributes (
+                "Main-Class": "org.jgille.mumon.application.bootstrao.MuMonApplication",
+        )
+    }
+}
+
+dependencies {
+    compile 'io.dropwizard:dropwizard-core:1.0.0'
+    compile 'io.dropwizard:dropwizard-assets:1.0.0'
+}
+
