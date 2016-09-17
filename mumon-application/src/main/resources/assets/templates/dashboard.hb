@@ -1,1 +1,5 @@
-<h1>Hello Handlebars!</h1>
+<div id="dashboard">
+    {{#each services}}
+        {{name}}
+    {{/each}}
+</div>
