@@ -38,6 +38,7 @@ public class ServiceInstanceReportResource {
                         .withServiceVersion(report.metadata.service.version)
                         .withInstanceId(report.metadata.instance.id)
                         .withHostAddress(report.metadata.instance.host_address)
+                        .withTimestamp(report.timestamp.toInstant())
                         .withStatus(Status.valueOf(report.health.status))
                         .withHealthChecks(report.health.health_checks.stream()
                                 .map(c -> HealthCheck.builder()

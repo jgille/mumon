@@ -6,53 +6,24 @@ function populate(templateName, context) {
     })
 }
 
-function onHashChanged() {
-    var serviceMatch = /services\/(\w+)/.exec(location.hash)
-    if (serviceMatch) {
-        var serviceName = serviceMatch[1];
-        loadService(serviceName);
-    } else {
-        loadDashboard();
-    }
-}
-
 function loadService(serviceName) {
-    var data = { name: serviceName, instances: [
-        {
-            id: 'instance_one',
-            status: 'CRITICAL',
-            service_version: '0.0.3',
-            host_address: 'http://123.23.23.56',
-            health_checks: [
-                { name: 'db', status: 'CRITICAL', message: 'Read timed out' },
-                { name: 'ldap', status: 'HEALTHY' }
-            ]
-        },
-        {
-            id: 'instance_two',
-            status: 'HEALTHY',
-            service_version: '0.0.3',
-            host_address: 'http://123.23.23.84',
-            health_checks: [
-                { name: 'db', status: 'HEALTHY' },
-                { name: 'ldap', status: 'HEALTHY' }
-            ]
+    $.get('api/services/' + serviceName, function (data) {
+        for (i = 0; i < data.instances.length; i++) {
+            var formatted = moment(data.instances[i].timestamp).format("ddd, MMM Do, HH:mm:ss");
+            data.instances[i].timestamp = formatted;
         }
-    ]};
-    populate('service', data);
+        populate('service', data);
+    });
 }
 
 function loadDashboard() {
-    var data = { services : [
-        {name: 'submission_service', status: 'CRITICAL'},
-        {name: 'review_service', status: 'WARNING'},
-        {name: 'recommendation_service', status: 'HEALTHY'}
-    ]};
-    populate('dashboard', data);
+    $.get('api/services', function (data) {
+       populate('dashboard', data);
+    });
 }
 
 $(window).on('hashchange', function() {
-    var serviceMatch = /services\/(\w+)/.exec(location.hash)
+    var serviceMatch = /services\/(.+)/.exec(location.hash)
     if (serviceMatch) {
         var serviceId = serviceMatch[1];
         loadService(serviceId);

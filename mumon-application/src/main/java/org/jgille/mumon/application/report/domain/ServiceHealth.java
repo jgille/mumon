@@ -16,7 +16,7 @@ public class ServiceHealth {
     }
 
     private int compareInstances(ServiceInstanceHealth i1, ServiceInstanceHealth i2) {
-        // Sort based on health and time
+        // Sort based on status and time
         if (i1.status() == i2.status()) {
             return i2.timestamp().compareTo(i1.timestamp());
         } else {
