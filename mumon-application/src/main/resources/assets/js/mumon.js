@@ -17,11 +17,38 @@ function onHashChanged() {
 }
 
 function loadService(serviceName) {
-    populate('service', { name: serviceName, instances: [ { id: 'instance_one'}, { id: 'instanceTwo'}]} );
+    var data = { name: serviceName, instances: [
+        {
+            id: 'instance_one',
+            status: 'CRITICAL',
+            service_version: '0.0.3',
+            host_address: 'http://123.23.23.56',
+            health_checks: [
+                { name: 'db', status: 'CRITICAL', message: 'Read timed out' },
+                { name: 'ldap', status: 'HEALTHY' }
+            ]
+        },
+        {
+            id: 'instance_two',
+            status: 'HEALTHY',
+            service_version: '0.0.3',
+            host_address: 'http://123.23.23.84',
+            health_checks: [
+                { name: 'db', status: 'HEALTHY' },
+                { name: 'ldap', status: 'HEALTHY' }
+            ]
+        }
+    ]};
+    populate('service', data);
 }
 
 function loadDashboard() {
-    populate('dashboard', { services : [ {name: 'submission_service'}, {name: 'review-service'} ]});
+    var data = { services : [
+        {name: 'submission_service', status: 'CRITICAL'},
+        {name: 'review_service', status: 'WARNING'},
+        {name: 'recommendation_service', status: 'HEALTHY'}
+    ]};
+    populate('dashboard', data);
 }
 
 $(window).on('hashchange', function() {
