@@ -1,4 +1,4 @@
-package org.jgille.mumon.application.bootstrao;
+package org.jgille.mumon.application.bootstrap;
 
 import io.dropwizard.Configuration;
 

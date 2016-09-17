@@ -1,0 +1,33 @@
+.HEALTHY {
+    background-color: #77b300;
+}
+
+.WARNING {
+    background-color: #ff8800;
+
+}
+
+.CRITICAL {
+    background-color: #cc0000;
+}
+
+div.dashboard {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.dashboard .label {
+    font-size: 36px;
+    height: 100px;
+    margin-top: 10px;
+    padding-top: 30px;
+    border-radius: 2px;
+}
+
+.health_checks {
+    font-size: 24px;
+}
+
+.health_checks .label {
+    border-radius: 0px;
+}
