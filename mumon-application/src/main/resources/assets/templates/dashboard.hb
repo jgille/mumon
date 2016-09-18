@@ -5,5 +5,7 @@
             {{name}}
         </a>
     </div>
+    {{else}}
+    <div class="alert alert-warning col-md-4"><h3>No monitored services</h3></div>
     {{/each}}
 </div>

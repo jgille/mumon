@@ -1,18 +1,21 @@
 .HEALTHY {
-    background-color: #77b300;
+    background-color: #669606;
 }
 
 .WARNING {
-    background-color: #ff8800;
-
+    background-color: #dea401;
 }
 
 .CRITICAL {
-    background-color: #cc0000;
+    background-color: #f05800;
 }
 
 .DOWN {
     background-color: #cc0000;
+}
+
+.label-lg {
+    font-size: 48px;
 }
 
 div.dashboard {

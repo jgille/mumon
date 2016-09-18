@@ -37,6 +37,6 @@
         </div>
     </div>
     {{else}}
-    <div class="alert alert-danger"><h3>No instances</h3></div>
+    <div class="heading alert alert-danger col-md-4"><h3>No instances</h3></div>
     {{/each}}
 </div>
