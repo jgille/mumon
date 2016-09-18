@@ -34,6 +34,8 @@ public class InMemoryServiceHealthRepository implements ServiceHealthRepository 
             InstanceCache instanceCache = serviceCache.get(instanceHealth.serviceName(),
                     () -> new InstanceCache(instanceHealth.serviceName(), instanceCoolDownPeriod));
             instanceCache.register(instanceHealth);
+            // Register again to make sure we don't expire services that are alive
+            serviceCache.put(instanceHealth.serviceName(), instanceCache);
         } catch (ExecutionException e) {
             // TODO: Use dedicated exception
             throw new RuntimeException("Failed to register service health", e);
