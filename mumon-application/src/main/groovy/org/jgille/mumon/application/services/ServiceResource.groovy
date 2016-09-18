@@ -21,7 +21,8 @@ class ServiceResource {
     }
 
     @GET
-    def getServiceStatuses() {
+    def getSystemHealth() {
+        // TODO: Sort by status
         [
                 services: serviceHealthRepository.currentSystemHealth().collect {
                     serviceHealth ->
@@ -35,7 +36,7 @@ class ServiceResource {
 
     @GET
     @Path('{service_name}')
-    def getServiceStatus(@PathParam('service_name') String serviceName) {
+    def getServiceHealth(@PathParam('service_name') String serviceName) {
         def currentServiceHealth = serviceHealthRepository.currentServiceHealth(serviceName)
         [
                 name     : serviceName,

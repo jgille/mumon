@@ -43,7 +43,8 @@ public class InMemoryServiceHealthRepository implements ServiceHealthRepository 
     @Override
     public List<ServiceHealth> currentSystemHealth() {
         Set<String> serviceNames = serviceCache.asMap().keySet();
-        return serviceNames.stream().map(this::currentServiceHealth).collect(Collectors.toList());
+        return serviceNames.stream().map(this::currentServiceHealth)
+                .sorted((s1, s2) -> s1.serviceName().compareTo(s2.serviceName())).collect(Collectors.toList());
     }
 
     @Override
@@ -71,17 +72,19 @@ public class InMemoryServiceHealthRepository implements ServiceHealthRepository 
                     .build();
         }
 
-        public String serviceName() {
+        private String serviceName() {
             return serviceName;
         }
 
-        public void register(ServiceInstanceHealth instanceHealth) {
+        private void register(ServiceInstanceHealth instanceHealth) {
             instanceCache.put(instanceHealth.instanceId(), instanceHealth);
         }
 
-        public List<ServiceInstanceHealth> instances() {
+        private List<ServiceInstanceHealth> instances() {
             Collection<ServiceInstanceHealth> values = instanceCache.asMap().values();
-            return new ArrayList<>(values);
+            List<ServiceInstanceHealth> result = new ArrayList<>(values);
+            result.sort((i1, i2) -> i1.instanceId().compareTo(i2.instanceId()));
+            return result;
         }
     }
 }
